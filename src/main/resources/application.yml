@@ -1,0 +1,36 @@
+server:
+  port: 8088
+
+logging:
+  level:
+    org.springframework: debug
+
+spring:
+  message:
+    basename: messages
+  datasource: #DB사용을 위한 datasource 정보 설정
+    url: jdbc:h2:mem:testdb
+    username: sa
+  jpa: #hibernate 관련 설정
+    hibernate:
+      ddl-auto: create-drop #애플리케이션이 시작될 때 테이블을 생성하고, 종료 시 테이블을 삭제
+    show-sql: true #작업되고 있는 SQL log파일 확인
+    defer-datasource-initialization: true
+    #script 파일이 있을 경우, hibernate 초기화 이후에 바로 작동할 수 있도록 설정
+    #script파일 : 저장하고 싶은 데이터들만 모아놓은 파일
+  h2: #h2 데이터베이스 console 사용하기 위한 설정
+    console:
+      enabled: true #사용
+      settings:
+        web-allow-others: true #추가적인 세팅(웹페이지로써 콘솔 사용 제공)
+#  security:
+#    user:
+#      name: username
+#      password: passw0rd
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
